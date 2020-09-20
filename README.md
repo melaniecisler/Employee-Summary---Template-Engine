@@ -10,6 +10,8 @@ In the `Develop` folder, there is a `package.json`, so make sure to `npm install
 
 To run use node app.js
 
+![](app.PNG)
+
 # Test 
 
 You can run the tests at any time with `npm run test`. Be sure to make this command in the root.
