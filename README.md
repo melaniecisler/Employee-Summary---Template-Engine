@@ -42,3 +42,4 @@ test/          // jest tests
 app.js         // Runs the application
 ```
 
+![](team.PNG)
