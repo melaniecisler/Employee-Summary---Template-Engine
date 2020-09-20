@@ -14,7 +14,7 @@ To run use node app.js
 
 You can run the tests at any time with `npm run test`. Be sure to make this command in the root.
 
-![](jesttest.png)
+![](jesttest.PNG)
 
 # Contributions
 
