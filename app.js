@@ -36,17 +36,17 @@ const render = require("./lib/htmlRenderer");
 
 //NEW
 
-// ===== START FUNCTION ===== 
+// ===== Begin function  ================================================ 
 async function start(){
     console.log("Choose your Team!");
 
-    // Set Variable to hold HTML
+    // hold HTML by setting variable 
     let teamHTML = "";
 
-    // Variable to hold number of team members
+    // number of team member's variables
     let teamSize;
 
-    // First Question to ask to set up loop
+    // set up loop, first question
     await inquirer.prompt(
         {
             type: "number",
@@ -56,27 +56,27 @@ async function start(){
     )
     .then((data) => {
 
-        // Number of team members placed in teamSize for scope purposes.
-        // 1 is added start from 1 rather than 0 for user understanding.
+        // teamSize, number of team members 
+        // add 1 so size makes sense to user
         teamSize = data.noOfTeamMem + 1;
     });
     
-    // If Team Size is 0, will end program
+    // end program when teamSize = 0 
     if (teamSize === 0){
-        console.log("I guess there is no one on your team...");
+        console.log("You have no team members");
         return;
     }
     
-    // Loop begins to ask questions depending on the size of the team
+    // team size will depict how many questions are asked
     for(i = 1; i < teamSize; i++){
 
-        // Global variables set
+        // set variables
         let name;
         let id;
         let title;
         let email;
 
-        // Prompts user to answer the basic questions of the employee
+        // employee questions prompted 
         await inquirer.prompt([ 
             {
                 type: "input",
@@ -102,18 +102,18 @@ async function start(){
         ])
         .then((data) => {
 
-            // Takes data from user and places value in global variables
+            // user data placed in variables
             name = data.name;
             id = data.id;
             title = data.title;
             email = data.email;
         });
 
-        // Switch Case depending on the title of the employee
+        // depending on employee title, switch case made 
         switch (title){
             case "Manager":
 
-                // ask user of Manager's Office Number
+                // if manager get office number
                 await inquirer.prompt([
                     {
                         type: "input",
@@ -123,19 +123,19 @@ async function start(){
                 ])
                 .then((data) => {
 
-                    // Create a new object with all avaiable user input data
+                    // create new object with input data from user 
                     const manager = new Manager(name, id, email, data.officeNo);
 
-                    // Reads and places HTML from manager.html in teamMemever Variable
+                    // reads html from manager.html placed into teamMember variable 
                     teamMember = fs.readFileSync("templates/manager.html");
 
-                    // Uses eval() to pass template literals from html files.
-                    // Adds the string to the team HTML.
+                    // eval() will pass template literals from html files
+                    // add string to team HTML.
                     teamHTML = teamHTML + "\n" + eval('`'+ teamMember +'`');
                 });
                 break;
 
-            //Steps Similar to Manager but for intern
+            //same as manager but with intern data and criteria
             case "Intern":
                 await inquirer.prompt([
                     {
@@ -151,7 +151,7 @@ async function start(){
                 });
                 break;
 
-            //Steps Similar to Manager but for engineer
+            //sama as manager but with engineer data and criteria
             case "Engineer":
                 await inquirer.prompt([
                     {
@@ -167,11 +167,11 @@ async function start(){
                 });
                 break;
 
-        } // End of Switch Case
+        } // switch case ends 
 
-    } // End of For loop
+    } // for loop ends
 
-    // Reads main.html and places html in a variable
+    // reads main.html and places html in a variable
     const mainHTML = fs.readFileSync("templates/main.html");
     
     // Use eval to implement template literals in main.html and places teamHTML inside main template
